@@ -34,6 +34,7 @@ work.
 
 1. Basic template:
 
+```javascript
 const WebSocket = require('ws');
 
 const ws = new WebSocket('ws://www.host.com/path');
@@ -56,11 +57,12 @@ wss.on('connection', function(ws) {
         console.log('received: %s', message);
     });
 });
-
+```
 
 
 2
 
+```javascript
 const WebSocket = require('ws');
 
 const wss = new WebSocket.Server({ port: 8080 });
@@ -80,7 +82,9 @@ wss.on('connection', function(ws) {
         console.log('received: %s', message);
     });
 });
+```
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,9 +104,11 @@ wss.on('connection', function(ws) {
 
 </body>
 </html>
+```
 
 3
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,10 +128,11 @@ wss.on('connection', function(ws) {
 
 </body>
 </html>
-
+```
 
 4.
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,6 +159,7 @@ wss.on('connection', function(ws) {
 
 </body>
 </html>
+```
 
 5.
 
