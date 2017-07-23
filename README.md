@@ -29,3 +29,133 @@ We now see the client conntected and the message sent by the client on the serve
 
 This is a very simple Websocket demo. I hope this was useful to introduce the basics of how the websocket client and server
 work.
+
+## Screencast Outline
+
+1. Basic template:
+
+const WebSocket = require('ws');
+
+const ws = new WebSocket('ws://www.host.com/path');
+
+ws.on('open', function open() {
+  ws.send('something');
+});
+
+ws.on('message', function incoming(data) {
+  console.log(data);
+});
+
+
+var WebSocketServer = require('ws').Server,
+    wss = new WebSocketServer({port: 8080});
+
+wss.on('connection', function(ws) {
+    console.log('client connected');
+    ws.on('message', function(message) {
+        console.log('received: %s', message);
+    });
+});
+
+
+
+2
+
+const WebSocket = require('ws');
+
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+  ws.send('something');
+});
+
+
+wss.on('connection', function(ws) {
+    console.log('client connected');
+    ws.on('message', function(message) {
+        console.log('received: %s', message);
+    });
+});
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WebSocket Hello World</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+
+    </script>
+</head>
+<body lang="en">
+
+  <form id="echo_form" >
+    <input class="form-control" type="text" name="message" id="message" placeholder="Type text to echo in here" value="" autofocus/>
+
+    <button type="button" id="send" class="btn btn-primary">Send</button>
+  </form>
+
+</body>
+</html>
+
+3
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WebSocket Hello World</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+
+    </script>
+</head>
+<body lang="en">
+
+  <form id="echo_form" onsubmit="sendMessage(); return false;">
+    <input class="form-control" type="text" name="message" id="message" placeholder="Type text to echo in here" value="" autofocus/>
+
+    <button type="button" id="send" class="btn btn-primary" onclick="sendMessage();">Send</button>
+  </form>
+
+</body>
+</html>
+
+
+4.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WebSocket Hello World</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        var ws = new WebSocket("ws://localhost:8080");
+        ws.onopen = function(e) {
+          console.log('Connected to server');
+        }
+
+        function sendMessage() {
+            ws.send($('#message').val());
+        }
+    </script>
+</head>
+<body lang="en">
+
+  <form id="echo_form" onsubmit="sendMessage(); return false;">
+    <input class="form-control" type="text" name="message" id="message" placeholder="Type text to echo in here" value="" autofocus/>
+
+    <button type="button" id="send" class="btn btn-primary" onclick="sendMessage();">Send</button>
+  </form>
+
+</body>
+</html>
+
+5.
+
+server.js
+
+https://rubyplus.com/articles/4451-WebSocket-Basics-Hello-World
+
