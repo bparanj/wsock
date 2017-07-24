@@ -1,4 +1,5 @@
-# wsock
+# Hello World Websocket Client and Websocket Server using Node
+
 Simple Websocket Client and Websocket Server https://rubyplus.com/articles/4451-WebSocket-Basics-Hello-World
 
 Let's create a index.html file. This is a simple html template that has jQuery library. It is blank. Let' add a form that has
@@ -167,3 +168,27 @@ server.js
 
 https://rubyplus.com/articles/4451-WebSocket-Basics-Hello-World
 
+# Streaming Data from Server using Websocket in Node
+
+In the Websockets basics episode, we saw how to send data from the client to the server. In this episode, we will see how to send data from the server to the client. 
+
+Let's create index.html file. This is a simple html template. We will use jQuery to display the random numbers we get from the server on the browser. The page does not display anything. We can check the console to make sure there are no error messages. Let's add a div with id randomNumbs. 
+
+We require the Websocket library ws we installed in the earlier episode. We establish connection to the server. When the connection is opened, we can log 'Connected to server' message in the console. 
+
+We are now ready to receive messages from the server in the onmessage handler. We can log the data we get from the server in the console. When we receive a data from the server, we append the number to the div with id randomNums. Whenever the data is received from the server, the onmessage javascript function is fired.
+
+Let's create server.js file for the Websocket server that will listen on port 8080. We first require the websocket library. We can create a new WebSocket server that listens on port 8080. When a client connects to the server, we can handle it in the connection function that takes an argument. We can handle any incoming message from the client in the incoming message function. We will just log the message we received from the client in the console. 
+
+We can define our own function that takes the ws parameter as the argument. This function generates a random number and sends it to the client by calling the send on the client object ws. The setInterval function is used to stream random number at one second at a time to the client so that we can see the numbers emerging one by one in the browser. This function calls our custom function, sendRandomNumbers repeatedly once every second. 
+
+Let's comment out the streaming part. We can start the server. Let's reload the page. We don't see anything in the console. Let's uncomment the streaming code and reload the browser. We need to restart the server. If we reload the browser, we now see the random numbers from the server. We can check the logs for the messages we log on the console. We see the 'Connected to server' on the onopen event. 
+
+When a connection is establised by the client, we can log it here. We can restart the server. If we reload this page, we see the 'Connected to server' message in the console. We don't need to receive any message from the client for this streaming example. You can modify this program to take a stock symbol from the client and stream the stock price of a particular stock to the browser. This requires combining this example with the example shown in the previous episode.
+
+Let's clear the log and reload the browser. You can see the console log message that we added to the server in the terminal. Let's stop the server. If we click on the onopen event handler, we go to the corresponding line in the code. Similarly, the onmessage goes to the onmessage event handler. 
+
+In a real app like tennis score board, there will be an unknown amount of delay in getting the latest score. The score board on the browser will be updated whenever the point is won. I used the Server example found in the ws library github home page as a starting point for this demo.
+
+
+The server will send a random number once every second. 
