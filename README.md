@@ -192,3 +192,69 @@ In a real app like tennis score board, there will be an unknown amount of delay 
 
 
 The server will send a random number once every second. 
+
+## Screencast Outline
+
+1
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Random Number Streamer</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script>
+
+  </script>
+</head>
+<body lang="en">
+
+</body>
+</html>
+```
+2
+```html
+<body lang="en">
+
+  <div id="randomNums"></div>    
+
+</body>
+</html>
+```
+
+3
+```javascript
+  <script>
+    var ws = new WebSocket("ws://localhost:8080");
+    ws.onopen = function(e) {
+      console.log('Connected to server');
+    }
+      ws.onmessage = function(event) {
+        console.log(event.data);
+        $( '#randomNums' ).append(event.data + ' ');
+      }
+  </script>
+```
+4
+
+server.js
+
+```javascript
+const WebSocket = require('ws');
+
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+  var clientRandomNumberUpdater;
+  var sendRandomNumbers = function(ws) {
+    var randomNum = Math.floor(Math.random() * 11);  
+    ws.send(randomNum.toString());      
+  }
+  clientRandomNumberUpdater = setInterval(function(){
+      sendRandomNumbers(ws);
+  }, 1000);  
+});
+```
